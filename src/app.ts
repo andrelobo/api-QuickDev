@@ -1,5 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
+import { ConnectOptions } from 'mongoose';
+
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -12,12 +14,12 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nome-do-banco', {
+(mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nome-do-banco', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
+} as ConnectOptions) as Promise<typeof import("mongoose")>)
 .then(() => console.log('Connected to MongoDB'))
-.catch((error) => console.error('Error connecting to MongoDB:', error));
+.catch((error: Error) => console.error('Error connecting to MongoDB:', error));
 
 app.get('/', (req: Request, res: Response) => {
     res.send('API is working');
