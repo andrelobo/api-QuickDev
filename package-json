@@ -1,0 +1,30 @@
+{
+  "name": "api-quick-dev",
+  "version": "1.0.0",
+  "description": "API de teste Quick Dev",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc"
+   
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",   
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^16.11.7",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.14",    
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
