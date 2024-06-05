@@ -1,10 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import { ConnectOptions } from 'mongoose';
-
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
+import authRoutes from './routes/auth';
 
 dotenv.config();
 
@@ -22,8 +22,10 @@ app.use(morgan('dev'));
 .catch((error: Error) => console.error('Error connecting to MongoDB:', error));
 
 app.get('/', (req: Request, res: Response) => {
-    res.send('API is working');
+    res.send('Great! The API is working');
 });
+
+app.use('/api/auth', authRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
