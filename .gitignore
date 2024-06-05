@@ -1,0 +1,19 @@
+# Arquivos e diretórios do Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Arquivos de build
+dist/
+build/
+
+# Arquivos de ambiente
+.env
+
+# Arquivos de configuração locais
+.vscode/
+.idea/
+
+# Outros arquivos gerados durante o desenvolvimento
+.DS_Store
+Thumbs.db
