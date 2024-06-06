@@ -35,7 +35,44 @@ export const updatePost = async (req: Request, res: Response) => {
   }
 };
 
-// Incrementar contador de visualizações de uma postagem
+export const getAllPosts = async (req: Request, res: Response) => {
+  try {
+    const posts = await Post.find();
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+
+export const getPostById = async (req: Request, res: Response) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+
+export const deletePost = async (req: Request, res: Response) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findByIdAndDelete(postId);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+
 export const incrementViews = async (req: Request, res: Response) => {
   try {
     const { postId } = req.params;
@@ -51,10 +88,13 @@ export const incrementViews = async (req: Request, res: Response) => {
   }
 };
 
-// Incrementar contador de curtidas de uma postagem
+
 export const incrementLikes = async (req: Request, res: Response) => {
   try {
     const { postId } = req.params;
+    if (!postId) {
+      return res.status(400).json({ message: 'Missing postId' });
+    }
     const post = await Post.findById(postId);
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
@@ -63,22 +103,8 @@ export const incrementLikes = async (req: Request, res: Response) => {
     await post.save();
     res.status(200).json({ message: 'Like count incremented successfully' });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Server error', error });
   }
 };
 
-// Incrementar contador de não curtidas de uma postagem
-export const incrementDislikes = async (req: Request, res: Response) => {
-  try {
-    const { postId } = req.params;
-    const post = await Post.findById(postId);
-    if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
-    }
-    post.dislikes += 1;
-    await post.save();
-    res.status(200).json({ message: 'Dislike count incremented successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
-  }
-};
