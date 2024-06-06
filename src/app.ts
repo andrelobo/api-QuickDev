@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-(mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nome-do-banco', {
+(mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:7777', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 } as ConnectOptions) as Promise<typeof import("mongoose")>)
@@ -26,6 +26,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/auth/users', authRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
