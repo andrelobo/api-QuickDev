@@ -1,21 +1,18 @@
 // post.controller.ts
-
 import { Request, Response } from 'express';
 import Post, { IPost } from '../models/posts';
 
-// Criar uma nova postagem
 export const createPost = async (req: Request, res: Response) => {
   try {
     const { user_id, title, description, image } = req.body;
-    const post = new Post({ user_id, title, description, image });
-    await post.save();
-    res.status(201).json(post);
+    const newPost = new Post({ user_id, title, description, image });
+    const savedPost = await newPost.save();
+    res.status(201).json(savedPost);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }
 };
 
-// Atualizar uma postagem
 export const updatePost = async (req: Request, res: Response) => {
   try {
     const { postId } = req.params;
@@ -24,12 +21,11 @@ export const updatePost = async (req: Request, res: Response) => {
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
-    // Salvar a versão anterior da postagem no histórico de edições
     post.editHistory.push({ editedAt: new Date(), title: post.title, description: post.description });
     post.title = title;
     post.description = description;
-    await post.save();
-    res.status(200).json(post);
+    const updatedPost = await post.save();
+    res.status(200).json(updatedPost);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }
@@ -44,7 +40,6 @@ export const getAllPosts = async (req: Request, res: Response) => {
   }
 };
 
-
 export const getPostById = async (req: Request, res: Response) => {
   try {
     const { postId } = req.params;
@@ -58,12 +53,11 @@ export const getPostById = async (req: Request, res: Response) => {
   }
 };
 
-
 export const deletePost = async (req: Request, res: Response) => {
   try {
     const { postId } = req.params;
-    const post = await Post.findByIdAndDelete(postId);
-    if (!post) {
+    const deletedPost = await Post.findByIdAndDelete(postId);
+    if (!deletedPost) {
       return res.status(404).json({ message: 'Post not found' });
     }
     res.status(200).json({ message: 'Post deleted successfully' });
@@ -71,7 +65,6 @@ export const deletePost = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error', error });
   }
 };
-
 
 export const incrementViews = async (req: Request, res: Response) => {
   try {
@@ -81,13 +74,12 @@ export const incrementViews = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Post not found' });
     }
     post.views += 1;
-    await post.save();
-    res.status(200).json({ message: 'View count incremented successfully' });
+    const updatedPost = await post.save();
+    res.status(200).json({ message: 'View count incremented successfully', updatedPost });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }
 };
-
 
 export const incrementLikes = async (req: Request, res: Response) => {
   try {
@@ -100,8 +92,8 @@ export const incrementLikes = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Post not found' });
     }
     post.likes += 1;
-    await post.save();
-    res.status(200).json({ message: 'Like count incremented successfully' });
+    const updatedPost = await post.save();
+    res.status(200).json({ message: 'Like count incremented successfully', updatedPost });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error', error });
