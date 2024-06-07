@@ -26,7 +26,6 @@ const userSchema: Schema = new Schema({
   }
 });
 
-// Pre-save hook to hash password
 userSchema.pre<IUser>('save', async function (next) {
   if (this.isModified('password') || this.isNew) {
     const salt = await bcrypt.genSalt(10);
@@ -35,7 +34,6 @@ userSchema.pre<IUser>('save', async function (next) {
   next();
 });
 
-// Method to compare password
 userSchema.methods.comparePassword = function (password: string): Promise<boolean> {
   return bcrypt.compare(password, this.password);
 };
