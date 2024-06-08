@@ -8,6 +8,7 @@ import morgan from 'morgan';
 import authRoutes from './routes/auth';
 import postRoutes from './routes/posts';
 import commentRoutes from './routes/comments';
+import reportRoutes from './routes/report';
 
 dotenv.config();
 
@@ -31,6 +32,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/report', reportRoutes);
+
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

@@ -5,7 +5,6 @@ import authenticateToken from '../middlewares/auth';
 
 const router = Router();
 
-// CRUD operations
 router.post('/', authenticateToken, createPost);
 router.get('/', getAllPosts);
 router.get('/:id', getPostById);
