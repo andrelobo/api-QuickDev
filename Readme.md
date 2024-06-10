@@ -12,7 +12,7 @@ Pacotes Adicionados
     Mongoose: Para modelagem de dados e integração com o MongoDB.
     Dotenv: Para gerenciar variáveis de ambiente.
     JSON Web Token (JWT): Para autenticação baseada em tokens.
-    Bcrypt: Para hash de senhas.
+    Bcrypt: Para ha de senhas.
     Multer: Para upload de arquivos.
 
 Banco de Dados
@@ -31,25 +31,25 @@ Passos para Instalação
 
     Clone o repositório do GitHub:
 
-    sh
+    
 
 git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
 
 Navegue até o diretório do projeto:
 
-sh
+
 
 cd SEU_REPOSITORIO
 
 Instale as dependências do projeto:
 
-sh
+
 
 npm install
 
 ou
 
-sh
+
 
 yarn install
 
@@ -68,25 +68,25 @@ Rodando o Projeto
 
     Inicie o servidor:
 
-    sh
+    
 
 npm start
 
 ou, para desenvolvimento com reinício automático:
 
-sh
+
 
 npm run dev
 
 ou
 
-sh
+
 
 yarn start
 
 ou
 
-sh
+
 
     yarn dev
 
@@ -97,5 +97,5 @@ Observações
 
     Certifique-se de que o MongoDB está rodando localmente ou ajuste a variável MONGO_URI no arquivo .env para apontar para a instância correta do MongoDB.
     Pasta Insomnia-export na raiz do projeto com os arquivos da ferramenta de requisições (Insomnia).
-    
+
 
