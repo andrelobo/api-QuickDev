@@ -96,4 +96,6 @@ sh
 Observações
 
     Certifique-se de que o MongoDB está rodando localmente ou ajuste a variável MONGO_URI no arquivo .env para apontar para a instância correta do MongoDB.
+    Pasta Insomnia-export na raiz do projeto com os arquivos da ferramenta de requisições (Insomnia).
+    
 
