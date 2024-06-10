@@ -33,7 +33,7 @@ Passos para Instalação
 
     
 
-git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
+git clone https://github.com/andrelobo/api-QuickDev
 
 Navegue até o diretório do projeto:
 
